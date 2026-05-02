@@ -111,7 +111,15 @@ export default function App() {
 
     } catch (err: any) {
       console.error(err);
-      setErrorMsg(err.message || 'حدث خطأ غير متوقع أثناء عملية المعالجة.');
+      let errorText = err.message || 'حدث خطأ غير متوقع أثناء عملية المعالجة.';
+      if (typeof errorText === 'string' && errorText.includes('429') && errorText.includes('credits are depleted')) {
+        errorText = 'نفد رصيد مفتاح واجهة برمجة التطبيقات (API Key) الخاص بك أو تجاوزت الحد المسموح. يرجى التحقق من إعدادات الفوترة في منصة Google AI Studio.';
+      } else if (typeof errorText === 'string' && errorText.includes('429')) {
+        errorText = 'تم الوصول إلى الحد الأقصى للطلبات لمفتاح API هذا. يرجى المحاولة لاحقاً أو الترقية لمفتاح مدفوع.';
+      } else if (typeof errorText === 'string' && errorText.includes('API_KEY_INVALID')) {
+        errorText = 'مفتاح API غير صالح. يرجى التأكد من نسخه بالكامل وبدون مسافات.';
+      }
+      setErrorMsg(errorText);
       setStep('error');
     }
 
