@@ -1,0 +1,6 @@
+{
+  "name": "محول الوورد لبلوجر (Blogger Docs Converter)",
+  "description": "تطبيق يحول ملفات Word إلى مقالات جاهزة لـ Blogger مع تنسيق خاص للآيات القرآنية.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
